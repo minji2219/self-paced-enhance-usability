@@ -21,11 +21,21 @@ const FlightBooking = () => {
       <div className="passenger-count">
         <label className="body-text">성인</label>
         <div className="counter">
-          <button className="button-text" onClick={decrementCount}>
+          <button
+            type="button"
+            aria-label="성인 승객 감소"
+            className="button-text"
+            onClick={decrementCount}
+          >
             -
           </button>
-          <span>{adultCount}</span>
-          <button className="button-text" onClick={incrementCount}>
+          <span aria-live="polite">{adultCount}</span>
+          <button
+            type="button"
+            aria-label="성인 승객 증가"
+            className="button-text"
+            onClick={incrementCount}
+          >
             +
           </button>
         </div>
