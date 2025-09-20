@@ -7,27 +7,23 @@ const MAX_PASSENGERS = 3;
 
 const FlightBooking = () => {
   const [adultCount, setAdultCount] = useState(1);
-  const [countLimit, setCountLimit] = useState({
-    isMin: false,
-    isMax: false,
-  });
+  const [limitMessage, setLimitMessage] = useState('');
 
   const incrementCount = () => {
     if (adultCount === MAX_PASSENGERS) {
-      setCountLimit((prev) => ({ ...prev, isMax: true }));
+      setLimitMessage('최대 승객 수에 도달했습니다.');
       return;
     }
     setAdultCount((prev) => Math.min(MAX_PASSENGERS, prev + 1));
-    setCountLimit((prev) => ({ ...prev, isMax: false }));
+    setLimitMessage('');
   };
 
   const decrementCount = () => {
     if (adultCount === MIN_PASSENGERS) {
-      setCountLimit((prev) => ({ ...prev, isMin: true }));
+      setLimitMessage('최소 승객 수에 도달했습니다.');
       return;
     }
     setAdultCount((prev) => Math.max(MIN_PASSENGERS, prev - 1));
-    setCountLimit((prev) => ({ ...prev, isMin: false }));
   };
 
   return (
@@ -53,14 +49,9 @@ const FlightBooking = () => {
           >
             +
           </button>
-          {countLimit.isMax && (
+          {limitMessage && (
             <div className="visually-hidden" role="status" aria-live="polite">
-              최대 승객 수에 도달했습니다.
-            </div>
-          )}
-          {countLimit.isMin && (
-            <div className="visually-hidden" role="status" aria-live="polite">
-              최소 승객 수에 도달했습니다.
+              {limitMessage}
             </div>
           )}
         </div>
